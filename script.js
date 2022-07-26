@@ -8,7 +8,8 @@ function getRandomInt(max=3) {
 }
 
 function capitalize(string) {
-    return string[0].toUpperCase() + string.slice(1, string.length).toLowerCase();
+    return string[0].toUpperCase() + 
+        string.slice(1, string.length).toLowerCase();
 }
 
 function isTie(computerSelection, playerSelection) {
@@ -66,15 +67,18 @@ function playerWins(computerSelection, playerSelection) {
 }
 
 function printTie(playerSelection) {
-    console.log("The round is a tie. Both choices where " + playerSelection + ".");
+    console.log("The round is a tie. Both choices where " + 
+        playerSelection + ".");
 }
 
 function printPlayerWins(computerSelection, playerSelection) {
-    console.log("Player wins this round. " + playerSelection + " beats " + computerSelection + ".");
+    console.log("Player wins this round. " + playerSelection + " beats " + 
+        computerSelection + ".");
 }
 
 function printComputerWins(computerSelection, playerSelection) {
-    console.log("Computer wins this round. " + computerSelection + " beats " + playerSelection + ".");
+    console.log("Computer wins this round. " + computerSelection + " beats " + 
+        playerSelection + ".");
 }
 
 function getComputerSelection() {
@@ -94,8 +98,9 @@ function getPlayerSelection() {
     let playerSelection = null;
 
     while (playerSelection == null) {
-        let playerInput = prompt("Please make your choice: rock, paper or scissors");
-
+        let playerInput = 
+            prompt("Please make your choice: rock, paper or scissors");
+    
         // Handle Cancel on input prompt
         if (playerInput == null) {
             if (confirm("Close current tab?")) {
@@ -161,11 +166,13 @@ function game() {
     // Print winner
     if (playerScore > computerScore) {
         // Player wins
-        console.log("Player wins", playerScore, "-", computerScore, "over the Computer!");
+        console.log("Player wins", playerScore, "-", computerScore, 
+            "over the Computer!");
     }
     else if (playerScore < computerScore) {
         // Computer wins
-        console.log("Computer wins", computerScore, "-", playerScore, "over the Player!");
+        console.log("Computer wins", computerScore, "-", playerScore, 
+            "over the Player!");
     }
     else {
         // Tie
