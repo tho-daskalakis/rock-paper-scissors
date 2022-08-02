@@ -1,0 +1,29 @@
+body {
+    font-family: 'Mouse Memoirs', sans-serif;
+    font-size: 40px;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    width: 100px;
+    height: auto;
+    font-size: 28px;
+    font-family: 'Mouse Memoirs', sans-serif;
+    background-color: coral;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+button:hover {
+    font-size: 34px;
+    color: yellow;
+}
+
+#buttons {
+    min-height: 50px;
+}

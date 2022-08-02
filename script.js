@@ -1,3 +1,10 @@
+const choices = document.querySelectorAll('button');
+console.log(choices);
+
+choices.forEach(button => button.addEventListener('click', function(e) {
+    console.log(e.target.id);
+}));
+
 function getRandomInt(max=3) {
     //Return a random integer between 0 (inclusive) and max (exclusive)
     const min = 0;
@@ -5,11 +12,6 @@ function getRandomInt(max=3) {
 
     // console.log(min, max);
     return Math.floor(Math.random() * max);
-}
-
-function capitalize(string) {
-    return string[0].toUpperCase() + 
-        string.slice(1, string.length).toLowerCase();
 }
 
 function isTie(computerSelection, playerSelection) {
@@ -94,37 +96,6 @@ function getComputerSelection() {
     }
 }
 
-function getPlayerSelection() {
-    let playerSelection = null;
-
-    while (playerSelection == null) {
-        let playerInput = 
-            prompt("Please make your choice: rock, paper or scissors");
-    
-        // Handle Cancel on input prompt
-        if (playerInput == null) {
-            if (confirm("Close current tab?")) {
-                window.close();
-            }
-            else {
-                window.location.reload();
-            }
-        }
-    
-        // Handle Ok with empty input
-        if (playerInput === "") { 
-            alert("Your input should be one of: rock, paper, scissors.");
-            continue;
-        }
-        
-        // Check for corret input
-        if (["Rock", "Paper", "Scissors"].includes(capitalize(playerInput))) {
-            playerSelection = capitalize(playerInput);
-            return playerSelection;
-        }    
-    }
-}
-
 function printInput(player, selection) {
     console.log(player, "chose", selection);
 }
@@ -134,33 +105,27 @@ function game() {
     let playerScore = 0;
     let computerScore = 0;
 
-    // Play 5 rounds
-    for (let i = 0; i < 5; i++) {
-        // Print round
-        console.log("Start of round", i + 1);
+    let computerSelection = getComputerSelection();
+    let playerSelection = getPlayerSelection();
 
-        let computerSelection = getComputerSelection();
-        let playerSelection = getPlayerSelection();
+    // Print inputs
+    printInput("Player", playerSelection);
+    printInput("Computer", computerSelection);
 
-        // Print inputs
-        printInput("Player", playerSelection);
-        printInput("Computer", computerSelection);
+    // Check for tie
+    if (isTie(computerSelection, playerSelection)) {
+        // Tie, skip the rest of the round
+        return;
+    }
 
-        // Check for tie
-        if (isTie(computerSelection, playerSelection)) {
-            // Tie, skip the rest of the loop
-            continue;
-        }
-
-        // No tie, check for the winner
-        if (playerWins(computerSelection, playerSelection)) {
-            // Player wins, increase score
-            playerScore++;
-        }
-        else {
-            // Computer wins, increase score
-            computerScore++;
-        }
+    // No tie, check for the winner
+    if (playerWins(computerSelection, playerSelection)) {
+        // Player wins, increase score
+        playerScore++;
+    }
+    else {
+        // Computer wins, increase score
+        computerScore++;
     }
 
     // Print winner
@@ -179,5 +144,3 @@ function game() {
         console.log("The game is a tie:", playerScore, "-", computerScore);
     }
 }
-
-game();
