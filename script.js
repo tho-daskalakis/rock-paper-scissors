@@ -7,6 +7,10 @@ choices.forEach(button => button.addEventListener('click', function(e) {
     game(playerSelection);
 }));
 
+const prompt = document.querySelector('#prompt');
+
+const score = document.querySelector('#score');
+
 function getRandomInt(max=3) {
     //Return a random integer between 0 (inclusive) and max (exclusive)
     const min = 0;
@@ -75,18 +79,18 @@ function playerWins(computerSelection, playerSelection) {
 }
 
 function printTie(playerSelection) {
-    console.log("The round is a tie. Both choices where " + 
-        playerSelection + ".");
+    prompt.textContent += "The round is a tie. Both choices where " + 
+        playerSelection + ".";
 }
 
 function printPlayerWins(computerSelection, playerSelection) {
-    console.log("Player wins this round. " + playerSelection + " beats " + 
-        computerSelection + ".");
+    prompt.textContent += "Player wins this round. " + playerSelection + " beats " + 
+        computerSelection + ".";
 }
 
 function printComputerWins(computerSelection, playerSelection) {
-    console.log("Computer wins this round. " + computerSelection + " beats " + 
-        playerSelection + ".");
+    prompt.textContent += "Computer wins this round. " + computerSelection + " beats " + 
+        playerSelection + ".";
 }
 
 function getComputerSelection() {
@@ -103,7 +107,7 @@ function getComputerSelection() {
 }
 
 function printInput(player, selection) {
-    console.log(player, "chose", selection);
+    prompt.textContent += `${player} chose ${selection}. \r\n`;
 }
 
 // Keep Player and Computer score
@@ -115,7 +119,8 @@ function game(playerSelection) {
     let computerSelection = getComputerSelection();
 
     // Print inputs
-    printInput("Player", playerSelection);
+    prompt.textContent = "";
+    printInput("You", playerSelection);
     printInput("Computer", computerSelection);
 
     // Check for tie
@@ -137,16 +142,16 @@ function game(playerSelection) {
     // Print winner
     if (playerScore > computerScore) {
         // Player wins
-        console.log("Player wins", playerScore, "-", computerScore, 
-            "over the Computer!");
+        score.textContent = `Player wins ${playerScore} - ${computerScore} 
+        over the Computer!`;
     }
     else if (playerScore < computerScore) {
         // Computer wins
-        console.log("Computer wins", computerScore, "-", playerScore, 
-            "over the Player!");
+        score.textContent = `Computer wins ${computerScore} - ${playerScore} 
+            over the Player!`;
     }
     else {
         // Tie
-        console.log("The game is a tie:", playerScore, "-", computerScore);
+        score.textContent = `The game is a tie: ${playerScore} - ${computerScore}`;
     }
 }
