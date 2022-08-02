@@ -10,6 +10,7 @@ choices.forEach(button => button.addEventListener('click', function(e) {
 const prompt = document.querySelector('#prompt');
 
 const score = document.querySelector('#score');
+score.textContent = "First to 5 wins!";
 
 function getRandomInt(max=3) {
     //Return a random integer between 0 (inclusive) and max (exclusive)
@@ -110,6 +111,13 @@ function printInput(player, selection) {
     prompt.textContent += `${player} chose ${selection}. \r\n`;
 }
 
+function gameWinner(winner, points) {
+    if (points >= 5) {
+        score.textContent += ` ${winner} wins the game!`;
+        choices.forEach(button => button.disabled = true);
+    }
+}
+
 // Keep Player and Computer score
 let playerScore = 0;
 let computerScore = 0;
@@ -154,4 +162,7 @@ function game(playerSelection) {
         // Tie
         score.textContent = `The game is a tie: ${playerScore} - ${computerScore}`;
     }
+
+    gameWinner("Player", playerScore);
+    gameWinner("Computer", computerScore);
 }
