@@ -1,8 +1,10 @@
 const choices = document.querySelectorAll('button');
-console.log(choices);
+
+let playerSelection = "";
 
 choices.forEach(button => button.addEventListener('click', function(e) {
-    console.log(e.target.id);
+    playerSelection = capitalize(e.target.id);
+    game(playerSelection);
 }));
 
 function getRandomInt(max=3) {
@@ -10,8 +12,12 @@ function getRandomInt(max=3) {
     const min = 0;
     max = Math.floor(max);
 
-    // console.log(min, max);
     return Math.floor(Math.random() * max);
+}
+
+function capitalize(string) {
+    return string[0].toUpperCase() + 
+        string.slice(1, string.length).toLowerCase();
 }
 
 function isTie(computerSelection, playerSelection) {
@@ -100,13 +106,13 @@ function printInput(player, selection) {
     console.log(player, "chose", selection);
 }
 
-function game() {
-    // Keep Player and Computer score
-    let playerScore = 0;
-    let computerScore = 0;
+// Keep Player and Computer score
+let playerScore = 0;
+let computerScore = 0;
+
+function game(playerSelection) {
 
     let computerSelection = getComputerSelection();
-    let playerSelection = getPlayerSelection();
 
     // Print inputs
     printInput("Player", playerSelection);
